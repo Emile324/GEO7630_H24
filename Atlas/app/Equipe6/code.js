@@ -44,7 +44,11 @@ function addDataToMap() {
         'id': 'zone_travaux',
         'type': 'line',
         'source': 'zone_travaux-source',
-        'source-layer': 'FH791176.zone_travaux'
+        'source-layer': 'FH791176.zone_travaux',
+        'paint': {
+            'line-color': '#FF0000',
+            'line-width': 5
+        }
     });
 }
 
