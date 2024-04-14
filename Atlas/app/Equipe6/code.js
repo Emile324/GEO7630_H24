@@ -12,3 +12,6 @@ document.getElementById('Equipe6').addEventListener('click', function() {
             'source-layer': 'FH791176.pistes_cyclables_agreables'
         });
 });
+ 
+
+function(bizarre)ff
