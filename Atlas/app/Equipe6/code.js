@@ -1,11 +1,5 @@
-console.log("Le script code.js est chargé.");
-
-
-
-
-
 function addDataToMap() {
-    // Ajouter les sources
+    // Supprimer les sources et les couches
     if (map.getLayer('pistes_cyclables_agreables')) {
         map.removeLayer('pistes_cyclables_agreables');
     }
@@ -20,6 +14,8 @@ function addDataToMap() {
         map.removeSource('zone_travaux-source');
     }
 
+
+    // Ajouter les sources
     map.addSource('pistes_cyclables_agreables-source', {
         type: 'vector',
         tiles: ['https://friendly-trout-jj5q9rp765q935g9j-8801.app.github.dev/FH791176.pistes_cyclables_agreables/{z}/{x}/{y}.pbf'],
@@ -36,7 +32,7 @@ function addDataToMap() {
 
 
     
-    // Ajoute la couche
+    // Ajouter les couches
     map.addLayer({
        'id': 'pistes_cyclables_agreables',
        'type': 'line', 
