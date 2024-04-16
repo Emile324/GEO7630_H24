@@ -142,11 +142,11 @@ map.on('load', function () {
 
     // ajout de la source des garages
 
-    map.addSource('indice_emv_hex_200m_result-source', {
+    map.addSource('indice_env_hex_200m_result-source', {
 
         type: 'vector', // https://maplibre.org/maplibre-style-spec/sources/
 
-        tiles: ["https://probable-orbit-5g5vw6rv965h7p7j-8801.app.github.dev/geo7630.indice_emv_hex_200m_result/{z}/{x}/{y}.pbf"] // URL des tuiles vectorielles attention à bien mettre là votre
+        tiles: ['https://probable-orbit-5g5vw6rv965h7p7j-8801.app.github.dev/geo7630.indice_emv_hex_200m_result/{z}/{x}/{y}.pbf'] // URL des tuiles vectorielles attention à bien mettre là votre
 
     })
 
@@ -161,6 +161,14 @@ map.on('load', function () {
         'source': 'indice_emv_hex_200m_result-source', // source des données de la couche
 
         'source-layer': 'geo7630.indice_emv_hex_200m_result', // source des données de la couche (id dans le JSON de pgtileserv), majoritairement nom du schéma.nomdelatable
+
+        'paint': {
+
+            'fill-color': '#FF0000', // Couleur de remplissage (rouge)
+
+            'fill-opacity': 0.5 // Opacité du remplissage (50%)
+
+        }
 
     })
 
