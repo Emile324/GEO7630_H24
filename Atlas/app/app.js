@@ -142,7 +142,7 @@ map.on('load', function () {
 
     // ajout de la source des garages
 
-    map.addSource('indice_env_hex_200m_result-source', {
+    map.addSource('indice_emv_hex_200m_result-source', {
 
         type: 'vector', // https://maplibre.org/maplibre-style-spec/sources/
 
@@ -160,7 +160,7 @@ map.on('load', function () {
 
         'source': 'indice_emv_hex_200m_result-source', // source des données de la couche
 
-        'source-layer': 'geo7630.indice_emv_hex_200m_result', // source des données de la couche (id dans le JSON de pgtileserv), majoritairement nom du schéma.nomdelatable
+        'source-layer': 'GEO7630_H24.indice_emv_hex_200m_result', // source des données de la couche (id dans le JSON de pgtileserv), majoritairement nom du schéma.nomdelatable
 
         'paint': {
 
@@ -173,3 +173,54 @@ map.on('load', function () {
     })
 
 });
+
+
+
+
+
+
+/**
+ * Fonction qui génère une couleur aléatoire en format hexadécimal.
+ * @returns {string} Couleur générée au format hexadécimal.
+ */
+
+function getRandomColor() {
+    // Définition des caractères hexadécimaux possibles
+    var letters = '0123456789ABCDEF';
+    // Initialisation de la couleur avec le préfixe hexadécimal (#)
+    var color = '#';
+    // Boucle pour générer chaque caractère de la couleur (6 caractères)
+    for (var i = 0; i < 6; i++) {
+        // Sélection aléatoire d'un caractère hexadécimal
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+
+    // Retourne la couleur générée au format hexadécimal
+    return color;
+}
+
+/**
+ * Fonction qui charge une couche WFS depuis pgFeatureServ et l'ajoute à la carte MapLibre.
+ * Cette fonction ajoute une source de données GeoJSON à partir d'une URL pgFeatureServ
+ * et ajoute une couche de remplissage ('fill') à la carte MapLibre en utilisant cette source de données.
+ */
+
+function loadWFS() {
+    // Ajout de la source de données des arrondissements depuis pgFeatureServ
+    map.addSource('arrondissements-source', {
+        type: 'geojson', // Type de source de données
+        data: 'https://solid-robot-66qj67v4535v7g-9000.app.github.dev/collections/geo7630.arrondissements/items.json?limit=10000' // URL pgFeatureServ GeoJSON
+    });
+
+    // Ajout de la couche des arrondissements à la carte MapLibre
+    map.addLayer({
+        'id': 'arrondissements', // Identifiant de la couche
+        'type': 'fill', // Type de géométrie de la couche (remplissage)
+        'source': 'arrondissements-source', // Source des données de la couche
+        'paint': {
+            'fill-outline-color': 'black',
+            'fill-color': getRandomColor(), // Si la condition est vraie, utilisez une couleur aléatoire
+            'fill-opacity': 0.3 // Opacité de remplissage (30%)
+        }
+    });
+}
