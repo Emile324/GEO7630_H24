@@ -84,3 +84,84 @@ map.on('idle', function () {
     });
     // alert('test')
 });
+
+
+// création du contrôle de navigation (BONUS I)
+
+var nav = new maplibregl.NavigationControl({
+
+    showCompass: true, // affichage de la boussole
+
+    showZoom: true, // affichage des boutons de zoom
+
+    visualizePitch: true // affichage de l'angle d'inclinaison
+
+});
+
+// Finalement on ajoute le contrôleur à la carte
+
+map.addControl(nav, 'top-right'); // ajout du contrôle en haut à droite de la carte
+
+
+
+
+// création du contrôle de géolocalisation (BONUS II)
+
+var geolocateControl = new maplibregl.GeolocateControl({
+
+    positionOptions: {
+
+        enableHighAccuracy: true // activation de la géolocalisation précise
+
+    },
+
+    trackUserLocation: true // suivi automatique de la position de l'utilisateur
+
+})
+
+map.addControl(geolocateControl, 'bottom-right'); // ajout du contrôle en bas à droite de la carte
+
+
+
+
+// création du contrôle d'échelle (BONUS III)
+
+var scale = new maplibregl.ScaleControl({
+
+    unit: 'metric' // utilisation de l'unité métrique
+
+});
+
+map.addControl(scale); // ajout du contrôle en bas à gauche de la carte
+
+
+
+
+// MAP SOURCE MOFUCKAAAA
+map.on('load', function () {
+
+    // ajout de la source des garages
+
+    map.addSource('indice_emv_hex_200m_result-source', {
+
+        type: 'vector', // https://maplibre.org/maplibre-style-spec/sources/
+
+        tiles: ["https://probable-orbit-5g5vw6rv965h7p7j-8801.app.github.dev/geo7630.indice_emv_hex_200m_result/{z}/{x}/{y}.pbf"] // URL des tuiles vectorielles attention à bien mettre là votre
+
+    })
+
+    // ajout de la couche des garages
+
+    map.addLayer({
+
+        'id': 'indice_emv_hex_200m_result', // identifiant de la couche
+
+        'type': 'fill', // type de géométrie de la couche
+
+        'source': 'indice_emv_hex_200m_result-source', // source des données de la couche
+
+        'source-layer': 'geo7630.indice_emv_hex_200m_result', // source des données de la couche (id dans le JSON de pgtileserv), majoritairement nom du schéma.nomdelatable
+
+    })
+
+});
